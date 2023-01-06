@@ -19,7 +19,7 @@ rootHtmlElement.append(containerComponent.htmlElement);
 
 const handleColorDelete = async (id) => {
     try {
-        await ApiService.deleteColors(id);
+        await ApiService.deleteColor(id);
         colors = await ApiService.getColors();
         colorsTableComponent.renderColors(colors);
     }
@@ -30,26 +30,45 @@ const handleColorDelete = async (id) => {
 
 const handleColorCreate = async (colorProps) => {
     try {
-        await ApiService.createColors(colorProps);
+        await ApiService.createColor(colorProps);
         colors = await ApiService.getColors();
         colorsTableComponent.renderColors(colors, editedRowId);
+
+    }catch (error) {
+        alertComponent.show(error.message)
     }
-    catch (error) {
+}
+const handleColorUpdate = async (colorProps) => {
+    try {
+        await ApiService.updateColor(editedRowId, colorProps);
+        colors = await ApiService.getColors();
+        editedRowId = null;
+        colorFormComponent.disableEditing();
+        colorsTableComponent.renderColors(colors, editedRowId);
+    }catch (error) {
         alertComponent.show(error.message)
     }
 }
 
-const handleColorEdit = (color) => {
-    if (editedRowId === color.id) editedRowId = null;
-    else editedRowId = color.id;
-    colorsTableComponent.renderColors(colors, editedRowId)
+const handleColorEdit = (colorProps) => {
+    if (editedRowId === colorProps.id) editedRowId = null;
+    else editedRowId = colorProps.id;
+
+    colorsTableComponent.renderColors(colors, editedRowId);
+    if (editedRowId === null) {
+        colorFormComponent.disableEditing();
+        colorFormComponent.onSubmit = handleColorCreate;
+    } else {
+        colorFormComponent.enableEditing(colorProps);
+        colorFormComponent.onSubmit = handleColorUpdate;
+    }
 }
 
 
 (async function initialize() {
     try {
         colors = await ApiService.getColors();
-        // dependency injection 2x
+        //                                                      dependency injection 2x
         colorsTableComponent = new ColorsTableComponent(colors, handleColorDelete, handleColorEdit);
         colorFormComponent = new ColorFormComponent(handleColorCreate);
         const flexContainerComponent = new FlexContainerComponent;
@@ -57,8 +76,7 @@ const handleColorEdit = (color) => {
         containerComponent.addComponents(flexContainerComponent);
         colorsTableComponent.renderColors(colors, editedRowId);
 
-    }
-    catch (error) {
+    }catch (error) {
         alertComponent.show(error.message)
     }
 

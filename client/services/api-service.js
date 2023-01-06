@@ -7,7 +7,7 @@ const getColors = async () => {
     return colors;
 }
 
-const deleteColors = async (id) => {
+const deleteColor = async (id) => {
     const response = await fetch(`${serverAddress}/colors/${id}`, {
         method: 'DELETE'
     });
@@ -16,7 +16,7 @@ const deleteColors = async (id) => {
     return colors;
 }
 
-const createColors = async (colorProps) => {
+const createColor = async (colorProps) => {
     const response = await fetch(`${serverAddress}/colors`, {
         method: 'POST',
         headers: {
@@ -30,9 +30,24 @@ const createColors = async (colorProps) => {
     return colors;
 }
 
+const updateColor = async (id, colorProps) => {
+    const response = await fetch(`${serverAddress}/colors/${id}`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            "accept": "application/json"
+        },
+        body: JSON.stringify(colorProps)
+    });
+    const colors = await response.json();
+
+    return colors;
+}
+
 const ApiService = {
     getColors,
-    deleteColors,
-    createColors,
+    deleteColor,
+    createColor,
+    updateColor
 }
 export default ApiService;

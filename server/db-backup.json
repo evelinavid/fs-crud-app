@@ -4,19 +4,19 @@
       "id": 1,
       "name": "blue",
       "HEXcode": "#0d6efd",
-      "availability": "false"
+      "availability": false
     },
     {
       "id": 2,
       "name": "yellow",
       "HEXcode": "#ffc107",
-      "availability": "true"
+      "availability": true
     },
     {
       "id": 3,
       "name": "pink",
       "HEXcode": "#d63384",
-      "availability": "false"
+      "availability": false
     }
   ]
   
