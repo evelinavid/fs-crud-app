@@ -2,9 +2,9 @@
   "colors": [
     {
       "id": 1,
-      "name": "blurrr",
+      "name": "blue",
       "HEXcode": "#0d6efd",
-      "availability": true
+      "availability": false
     },
     {
       "id": 2,
@@ -19,4 +19,5 @@
       "availability": false
     }
   ]
+  
 }

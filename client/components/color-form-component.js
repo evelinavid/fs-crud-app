@@ -18,7 +18,7 @@ class ColorFormComponent {
         </div>
         <div class="mb-3">
           <label for="HEXcode" class="form-label">Spalvos HEX kodas</label>
-          <input type="text" class="form-control" id="HEXcode" name="HEXcode">
+          <input type="color" class=" form-control form-control-lg" id="HEXcode" name="HEXcode">
         </div>
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" id="availability" name="availability">

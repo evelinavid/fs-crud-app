@@ -43,6 +43,7 @@ const handleColorUpdate = async (colorProps) => {
         editedRowId = null;
         colorFormComponent.disableEditing();
         colorsTableComponent.renderColors(colors, editedRowId);
+        colorFormComponent.onSubmit = handleColorCreate;
     } catch (error) {
         alertComponent.show(error.message)
     }
