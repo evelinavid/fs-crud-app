@@ -5,7 +5,7 @@ class ColorsTableComponent {
     onEdit;
     editedRowId;
 
-    constructor(colors, onDelete, onEdit) {
+    constructor({ colors, onDelete, onEdit }) {
         this.htmlElement = document.createElement('table');
         this.htmlElement.className = "table table-striped";
         this.htmlElement.innerHTML = ` 
@@ -27,11 +27,11 @@ class ColorsTableComponent {
     }
 
     createRowHtmlElement = (color) => {
-        const { id, name, HEXcode, availability }  = color
+        const { id, name, HEXcode, availability } = color
         const tr = document.createElement('tr')
-        const thisRowIsEdited = id=== this.editedRowId
-        if(thisRowIsEdited) tr.classList.add('bg-edited');
-    
+        const thisRowIsEdited = id === this.editedRowId
+        if (thisRowIsEdited) tr.classList.add('bg-edited');
+
         tr.innerHTML = `
         <td>${id}</td>
         <td>${name}</td>

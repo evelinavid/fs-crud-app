@@ -7,7 +7,7 @@ class ColorFormComponent {
   formNameElement;
   submitButton;
 
-  constructor(onSubmit) {
+  constructor({ onSubmit }) {
     this.htmlElement = document.createElement('form');
     this.htmlElement.className = "shadow p-3";
     this.htmlElement.innerHTML = `     
@@ -49,7 +49,7 @@ class ColorFormComponent {
     event.target.reset();
   }
 
-  enableEditing = ({name, HEXcode, availability}) => {
+  enableEditing = ({ name, HEXcode, availability }) => {
     this.nameInput.value = name;
     this.HEXcodeInput.value = HEXcode;
     this.availabilityInput.checked = availability;
